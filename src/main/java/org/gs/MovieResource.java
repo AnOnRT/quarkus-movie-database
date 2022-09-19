@@ -1,7 +1,5 @@
 package org.gs;
 
-
-
 import javax.inject.Inject;
 import javax.transaction.Transactional;
 import javax.ws.rs.*;
@@ -61,6 +59,18 @@ public class MovieResource {
             return Response.created(URI.create("/movies/" + movie.getId())).build();
         }
         return Response.status(NOT_FOUND).build();
+    }
+
+    @POST
+    @Path("{id}")
+    @Transactional
+    public Response updateById(@PathParam("id") Long id, Movie movie){
+
+        return movieRepository.findByIdOptional(id).map(
+                m -> {
+                    m.setTitle(movie.getTitle());
+                    return Response.ok(m).build();
+                }).orElse(Response.status(NOT_FOUND).build());
     }
 
     @DELETE

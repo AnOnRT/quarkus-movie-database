@@ -19,7 +19,7 @@ public class Movie {
     private String description;
 
     private String director;
-
+    private String country;
 
     public String getTitle() {
         return title;
@@ -45,10 +45,11 @@ public class Movie {
         this.director = director;
     }
 
-    public Long getId() {
+    public String getCountry() { return country; }
 
-        return id;
-    }
+    public void setCountry(String country) { this.country = country; }
+
+    public Long getId() { return id; }
 
     public void setId(Long id) {
         this.id = id;
